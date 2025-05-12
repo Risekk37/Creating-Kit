@@ -619,11 +619,31 @@ h1.section-title {
 }
 
 @media (max-width: 768px) {
+    /* 모바일용 헤더 스타일 수정 */
+    header {
+        flex-direction: column-reverse; /* 순서를 바꿔서 네비게이션이 위에 오도록 */
+        padding: 1.5rem;
+        align-items: flex-end; /* 오른쪽 정렬 */
+    }
+    
+    .logo {
+        font-size: 2.5rem; /* 로고 크기 줄임 */
+        margin-top: 1rem; /* 로고 위 여백 추가 */
+        align-self: flex-start; /* 로고는 왼쪽 정렬 */
+    }
+    
+    nav {
+        width: 100%; /* 네비게이션 전체 너비 사용 */
+        justify-content: flex-end; /* 오른쪽 정렬 */
+        margin-bottom: 0.5rem; /* 로고와의 간격 */
+    }
+    
+    /* 모바일용 홈 화면 스타일 */
     .intro-section {
         flex-direction: column;
         text-align: center;
         align-items: center;
-        
+        padding: 2rem 1rem; /* 패딩 줄임 */
     }
     
     .intro {
@@ -634,50 +654,106 @@ h1.section-title {
     }
 
     .name-title-container {
-        align-self: center;
-        text-align: center;
+        align-self: center; /* 중앙 정렬로 변경 */
+        text-align: center; /* 텍스트 중앙 정렬 */
         margin-bottom: 2rem;
+        width: 100%; /* 전체 너비 사용 */
     }
     
-    .philosophy-container {
-        width: 90%;
-        margin-bottom: 3rem;
-    }
-    
-    .intro-philosophy {
-        font-size: 1.2rem;
-    }
-    
-    .profile-pic {
-        height: auto;
-        align-items: center; /* 모바일에서는 중앙 정렬 */
-    }
-    
-    .profile-pic img {
-        max-height: 250px;
-        width: auto;
+    .name {
+        font-size: 2.5rem; /* 이름 크기 줄임 */
     }
     
     .titles {
+        font-size: 1.1rem; /* 직책 크기 줄임 */
         margin-bottom: 1rem; /* 모바일에서는 여백 추가 */
     }
     
-    .project-card {
-        width: 100%;
+    .philosophy-container {
+        width: 100%; /* 전체 너비 사용 */
+        margin-bottom: 2rem;
     }
     
+    .intro-philosophy {
+        font-size: 1.1rem; /* 텍스트 크기 줄임 */
+    }
+    
+    /* 모바일용 프로젝트 그리드 */
+    .projects-grid {
+        padding: 0 1rem; /* 패딩 줄임 */
+    }
+    
+    .project-card {
+        width: 100%; /* 한 줄에 하나의 카드만 표시 */
+        margin-bottom: 2.5rem; /* 카드 간격 늘림 */
+    }
+    
+    .project-card-image {
+        height: 200px; /* 이미지 높이 줄임 */
+    }
+    
+    .project-card-image img {
+        height: 200px; /* 이미지 높이 줄임 */
+    }
+    
+    /* 모바일용 섹션 타이틀 */
+    h1.section-title {
+        font-size: 2rem; /* 크기 줄임 */
+        margin: 2rem 0; /* 여백 줄임 */
+    }
+    
+    /* 갤러리 스타일 수정 */
     .gallery-row {
         flex-direction: column;
+        margin-bottom: 1rem; /* 행간 간격 줄임 */
     }
     
     .project-item {
-        width: 100%;
-    }
-    .project-overlay {
-        opacity: 1;
-        background-color: rgba(255, 255, 255, 0.7);
+        width: 100%; /* 전체 너비 사용 */
+        margin-bottom: 1rem; /* 항목 간 여백 추가 */
     }
     
+    /* 모바일에서는 초기에 오버레이 숨김 */
+    .project-overlay {
+        opacity: 0; /* 모바일에서도 초기에는 보이지 않음 */
+        background-color: rgba(255, 255, 255, 0.85); /* 배경 불투명도 유지 */
+        padding: 8%; /* 패딩 더 줄임 */
+        transition: opacity 0.3s ease;
+    }
+    
+    /* 오버레이 내 텍스트 크기 축소 (70% 정도로) */
+    .project-title {
+        font-size: 1.2rem; /* 제목 크기 줄임 (원래 1.8rem의 약 67%) */
+    }
+    
+    .project-meta {
+        font-size: 0.7rem; /* 카테고리/연도 크기 줄임 (원래 0.9rem의 약 70%) */
+    }
+    
+    .project-excerpt {
+        font-size: 0.7rem; /* 발췌문 크기 줄임 (원래 1rem의 70%) */
+        line-height: 1.3; /* 줄 간격도 줄임 */
+    }
+    
+    .project-read-more {
+        font-size: 0.7rem; /* 링크 크기 줄임 */
+    }
+    
+    /* 모바일에서 클릭했을 때 active 클래스 추가 */
+    .project-item.active .project-overlay {
+        opacity: 1;
+    }
+    
+    /* 프로젝트 상세 페이지 */
+    .project-detail-container {
+        padding: 2rem 1rem; /* 패딩 줄임 */
+    }
+    
+    .project-detail-title {
+        font-size: 2rem; /* 제목 크기 줄임 */
+    }
+    
+    /* 이미지 그리드 수정 */
     .project-image-grid {
         flex-direction: column;
     }
@@ -687,39 +763,32 @@ h1.section-title {
         margin-bottom: 1rem;
     }
     
-    .cv-item {
-        flex-direction: column;
-    }
-    
-    .cv-year {
-        margin-bottom: 0.5rem;
-    }
-
+    /* 이력서 스타일 수정 */
+    .cv-item,
     .publication-item,
-    .award-group {
+    .award-group,
+    .skill-item {
         flex-direction: column;
     }
     
+    .cv-year,
     .publication-year,
-    .award-year {
+    .award-year,
+    .skill-category-title {
+        width: 100%;
         margin-bottom: 0.5rem;
+        font-weight: bold; /* 모바일에서는 굵게 표시 */
+    }
+    
+    .cv-details,
+    .publication-details,
+    .award-list,
+    .skill-list {
+        padding-left: 0;
     }
     
     .award-item-vertical {
         margin-bottom: 1.5rem;
         padding-left: 0; /* 모바일에서는 왼쪽 여백 제거 */
-    }
-
-    .skill-item {
-        flex-direction: column;
-    }
-    
-    .skill-category-title {
-        margin-bottom: 0.5rem;
-        width: 100%;
-    }
-    
-    .skill-list {
-        padding-left: 0;
     }
 }

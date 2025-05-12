@@ -643,30 +643,75 @@ resumeTab.addEventListener('click', function() {
     window.history.pushState({view: 'resume'}, '', '#resume');
 });
 
-// 프로젝트 아이템 클릭 이벤트 (Read More 버튼)
-document.querySelectorAll('.project-read-more').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation(); // 이벤트 버블링 방지
-        
-        // 부모 프로젝트 아이템의 ID 가져오기
-        const projectItem = this.closest('.project-item');
-        const projectId = projectItem.dataset.projectId;
-        
-        // 프로젝트 상세 페이지 표시
-        showProjectDetail(projectId);
+// 모바일 환경에서 프로젝트 아이템 클릭 처리
+function setupMobileProjectInteractions() {
+    // 모든 프로젝트 아이템에 대해 처리
+    document.querySelectorAll('.project-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            // 모바일 환경에서만 특별히 처리 (768px 이하)
+            if (window.innerWidth <= 768) {
+                // 이미 활성화된 경우 클릭 이벤트가 Read More 버튼으로 전달되도록 함
+                if (this.classList.contains('active')) {
+                    // 클릭이 Read More 버튼에서 발생했는지 확인
+                    if (e.target.classList.contains('project-read-more') || 
+                        e.target.closest('.project-read-more')) {
+                        // Read More 버튼 클릭했을 때 프로젝트 상세 페이지로 이동
+                        e.preventDefault();
+                        const projectId = this.dataset.projectId;
+                        showProjectDetail(projectId);
+                    }
+                    return;
+                }
+                
+                // 모든 프로젝트 아이템에서 active 클래스 제거
+                document.querySelectorAll('.project-item').forEach(p => {
+                    p.classList.remove('active');
+                });
+                
+                // 현재 클릭한 아이템에 active 클래스 추가
+                this.classList.add('active');
+                
+                // 이벤트 전파 중지
+                e.preventDefault();
+                e.stopPropagation();
+            } else {
+                // 데스크톱에서는 기존 동작 유지
+                const projectId = this.dataset.projectId;
+                showProjectDetail(projectId);
+            }
+        });
     });
-});
-
-// 프로젝트 이미지 클릭 이벤트
-document.querySelectorAll('.project-item').forEach(item => {
-    item.addEventListener('click', function() {
-        const projectId = this.dataset.projectId;
-        showProjectDetail(projectId);
+    
+    // 문서 클릭 시 모든 프로젝트 아이템에서 active 클래스 제거
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            // 프로젝트 아이템 외부를 클릭했을 때만 active 클래스 제거
+            if (!e.target.closest('.project-item')) {
+                document.querySelectorAll('.project-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+        }
     });
-});
+    
+    // Read More 버튼 직접 클릭 처리
+    document.querySelectorAll('.project-read-more').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // 모바일 환경에서는 이벤트 버블링으로 처리하므로 별도 처리 불필요
+            if (window.innerWidth > 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const projectItem = this.closest('.project-item');
+                const projectId = projectItem.dataset.projectId;
+                
+                showProjectDetail(projectId);
+            }
+        });
+    });
+}
 
-// 홈 뷰에서의 Read More 버튼 처리 부분을 다음과 같이 수정
+// 홈 뷰에서의 Read More 버튼 처리
 document.querySelectorAll('.read-more').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -679,14 +724,34 @@ document.querySelectorAll('.read-more').forEach(link => {
         
         // 프로젝트 ID가 유효한 경우에만 상세 페이지로 이동
         if (projectId) {
-            // 먼저 브라우저 히스토리 상태 업데이트 (순서 중요)
-            window.history.pushState({view: 'home'}, '', '#home');
-            window.history.pushState({view: 'project', projectId: projectId}, '', '#project/' + projectId);
-            
-            // 그 다음 프로젝트 탭으로 이동하고 해당 프로젝트 상세 페이지 표시
+            // 홈 뷰에서 직접 프로젝트 상세 페이지로 이동
             resetAll();
-            projectTab.classList.add('active');
-            showProjectDetail(projectId);
+            
+            // 중요: 상세 페이지로 이동하기 전에 원래 있던 홈 뷰의 상태를 저장
+            if (!window.history.state || window.history.state.view !== 'home') {
+                window.history.replaceState({view: 'home'}, '', '#home');
+            }
+            
+            // 프로젝트 상세 페이지 표시
+            projectDetailView.classList.remove('hidden');
+            
+            // 상세 페이지에 대한 새 히스토리 항목 생성 (이전 홈 상태는 그대로 유지됨)
+            window.history.pushState({view: 'project', projectId: projectId, fromHome: true}, '', '#project/' + projectId);
+            
+            // 프로젝트 상세 정보 업데이트
+            const project = projectsData[projectId];
+            if (project) {
+                const detailCategory = projectDetailView.querySelector('.project-detail-category');
+                const detailYear = projectDetailView.querySelector('.project-detail-year');
+                const detailTitle = projectDetailView.querySelector('.project-detail-title');
+                const detailContent = projectDetailView.querySelector('.project-detail-content');
+                
+                // 프로젝트 정보로 상세 페이지 채우기
+                detailCategory.textContent = project.category || '';
+                detailYear.textContent = project.year || '';
+                detailTitle.textContent = project.title || '';
+                detailContent.innerHTML = project.description || '';
+            }
         } else {
             console.error('Project ID not found for this card');
         }
@@ -695,16 +760,11 @@ document.querySelectorAll('.read-more').forEach(link => {
 
 // 뒤로 가기 버튼 클릭 이벤트
 backToProjectsBtn.addEventListener('click', function() {
-    projectDetailView.classList.add('hidden');
-    projectTab.classList.add('active');
-    artworkView.classList.add('active-view');
-    
-    // 브라우저 히스토리에서 이전 상태로 이동하지 않고, 직접 프로젝트 목록 상태로 이동
-    window.history.pushState({view: 'projects'}, '', '#projects');
+    // 브라우저 히스토리에서 뒤로가기 실행
+    window.history.back();
 });
 
-
-// 브라우저 뒤로가기/앞으로가기 이벤트 처리 - 완전히 새로 작성
+// 브라우저 뒤로가기/앞으로가기 이벤트 처리
 window.addEventListener('popstate', function(event) {
     console.log('popstate event:', event.state);
     
@@ -720,8 +780,23 @@ window.addEventListener('popstate', function(event) {
     
     if (event.state.view === 'project') {
         // 프로젝트 상세 페이지로 이동
-        projectTab.classList.add('active');
-        showProjectDetail(event.state.projectId);
+        projectDetailView.classList.remove('hidden');
+        
+        // 프로젝트 데이터가 있다면 내용 채우기
+        const projectId = event.state.projectId;
+        const project = projectsData[projectId];
+        
+        if (project) {
+            const detailCategory = projectDetailView.querySelector('.project-detail-category');
+            const detailYear = projectDetailView.querySelector('.project-detail-year');
+            const detailTitle = projectDetailView.querySelector('.project-detail-title');
+            const detailContent = projectDetailView.querySelector('.project-detail-content');
+            
+            detailCategory.textContent = project.category || '';
+            detailYear.textContent = project.year || '';
+            detailTitle.textContent = project.title || '';
+            detailContent.innerHTML = project.description || '';
+        }
         
     } else if (event.state.view === 'projects') {
         // 프로젝트 목록 페이지로 이동
@@ -739,7 +814,7 @@ window.addEventListener('popstate', function(event) {
     }
 });
 
-// 페이지 로드 시 초기 히스토리 상태 설정 - 수정
+// 페이지 로드 시 초기 히스토리 상태 설정
 document.addEventListener('DOMContentLoaded', function() {
     // 먼저 모든 로그 확인용 코드 실행
     console.log('DOM Content Loaded');
@@ -752,6 +827,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기 상태 설정
     resetAll();
     homeView.classList.add('active-view');
+    
+    // 모바일 프로젝트 인터랙션 설정
+    setupMobileProjectInteractions();
+    
+    // 화면 크기 변경 시에도 인터랙션 재설정
+    window.addEventListener('resize', function() {
+        // active 클래스 초기화
+        if (window.innerWidth > 768) {
+            document.querySelectorAll('.project-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    });
     
     // URL 해시에 따라 적절한 뷰 표시
     const hash = window.location.hash;
