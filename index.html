@@ -12,12 +12,22 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <link rel="manifest" href="img/site.webmanifest">
     <link rel="stylesheet" href="styles.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1Y248ZTPS5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1Y248ZTPS5');
+    </script>
+
 </head>
 <body>
     <header>
         <div class="logo" id="home-tab">Creating Kit</div>
         <nav>
             <a id="project-tab">Project</a>
+            <a id="tech-studies-tab">Tech Studies</a>
             <a id="resume-tab">Resume</a>
             <div class="social-icons">
                 <a href="mailto:kk3775@columbia.edu"><img src="img/mail.png" alt="Email"></a>
@@ -297,7 +307,149 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- Tech Studies View -->
+        <div id="tech-studies-view">
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #555;">
+                A collection of technical explorations and skill demonstrations across various computational design tools and platforms.
+            </p>
+            
+            <div class="tech-studies-grid">
+                <div class="tech-study-card" data-tech-id="tech1">
+                    <div class="tech-study-image">
+                        <img src="img_tech\tech1.jpg" alt="BIM Project">
+                    </div>
+                    <div class="tech-study-content">
+                        <div class="tech-study-category">Building Information Modeling</div>
+                        <h3 class="tech-study-title">Revit BIM Implementation</h3>
+                        <p class="tech-study-description">
+                            Comprehensive building information modeling using Revit, including parametric family creation, 
+                            phase planning, and collaborative workflow optimization for complex architectural projects.
+                        </p>
+                        <div class="tech-study-tools">
+                            <span class="tool-tag">Revit</span>
+                            <span class="tool-tag">BIM</span>
+                            <span class="tool-tag">Dynamo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-study-card" data-tech-id="tech2">
+                    <div class="tech-study-image">
+                        <img src="img_tech\tech2.jpg" alt="Arduino Projects">
+                    </div>
+                    <div class="tech-study-content">
+                        <div class="tech-study-category">Physical Computing</div>
+                        <h3 class="tech-study-title">Arduino Interactive Systems</h3>
+                        <p class="tech-study-description">
+                            Development of interactive architectural systems using Arduino, including sensor integration, 
+                            actuator control, IoT connectivity, and responsive environment prototypes for smart building applications.
+                        </p>
+                        <div class="tech-study-tools">
+                            <span class="tool-tag">Arduino</span>
+                            <span class="tool-tag">Raspberry Pi</span>
+                            <span class="tool-tag">Sensors</span>
+                            <span class="tool-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-study-card"data-tech-id="tech3">
+                    <div class="tech-study-image">
+                        <img src="img_tech/tech3.png" alt="Robotic Control">
+                    </div>
+                    <div class="tech-study-content">
+                        <div class="tech-study-category">Robotic Fabrication</div>
+                        <h3 class="tech-study-title">Grasshopper_Robotic Control</h3>
+                        <p class="tech-study-description">
+                            Parametric programming for robotic arm control using Grasshopper, including path planning, 
+                            collision detection, and automated fabrication workflows for architectural components.
+                        </p>
+                        <div class="tech-study-tools">
+                            <span class="tool-tag">Grasshopper</span>
+                            <span class="tool-tag">Robotics Arm</span>
+                            <span class="tool-tag">Arduino</span>
+                            <span class="tool-tag">Rhino 3D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-study-card" data-tech-id="tech4">
+                    <div class="tech-study-image">
+                        <img src="img_tech/tech4.png" alt="GIS Analysis">
+                    </div>
+                    <div class="tech-study-content">
+                        <div class="tech-study-category">Geographic Information Systems</div>
+                        <h3 class="tech-study-title">ArcGIS Spatial Analysis</h3>
+                        <p class="tech-study-description">
+                            Advanced spatial analysis and mapping using ArcGIS, including demographic analysis, 
+                            site suitability studies, and urban planning visualizations with custom cartographic design.
+                        </p>
+                        <div class="tech-study-tools">
+                            <span class="tool-tag">ArcGIS Pro</span>
+                            <span class="tool-tag">QGIS</span>
+                            <span class="tool-tag">PostGIS</span>
+                            <span class="tool-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-study-card" data-tech-id="tech5">
+                    <div class="tech-study-image">
+                        <img src="img_tech/tech5.jpg" alt="Computational Design">
+                    </div>
+                    <div class="tech-study-content">
+                        <div class="tech-study-category">Computational Design</div>
+                        <h3 class="tech-study-title">Grasshopper_location & route</h3>
+                        <p class="tech-study-description">
+                            Using origin and destination analysis, the distances between homes and various essential utilities are measured and presented.
+                        </p>
+                        <div class="tech-study-tools">
+                            <span class="tool-tag">Grasshopper</span>
+                            <span class="tool-tag">Python</span>
+                            <span class="tool-tag">C#</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-study-card" data-tech-id="tech6">
+                    <div class="tech-study-image">
+                        <img src="img_tech/tech6.png" alt="Environmental Analysis">
+                    </div>
+                    <div class="tech-study-content">
+                        <div class="tech-study-category">Environmental Analysis</div>
+                        <h3 class="tech-study-title">Grasshopper_Environmental Simulation</h3>
+                        <p class="tech-study-description">
+                            Comprehensive environmental performance analysis using Grasshopper plugins, including solar analysis, 
+                            wind simulation, daylighting studies, and wind environment.
+                        </p>
+                        <div class="tech-study-tools">
+                            <span class="tool-tag">Ladybug</span>
+                            <span class="tool-tag">Honeybee</span>
+                            <span class="tool-tag">Butterfly</span>
+                            <span class="tool-tag">Galapagos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tech-detail-view" class="hidden">
+            <div class="project-detail-container">
+                <div class="project-detail-header">
+                    <button id="back-to-tech-studies" class="back-button">&larr; Back to Tech Studies</button>
+                    <div class="project-detail-meta">
+                        <span class="tech-detail-category">Category</span>
+                        <span class="tech-detail-tools">Tools</span>
+                    </div>
+                    <h2 class="tech-detail-title">Tech Study Title</h2>
+                </div>
+                
+                <div class="tech-detail-content">
+                    <!-- 여기에 동적으로 Tech Study 내용이 로드됩니다 -->
+                </div>
+            </div>
+        </div>
         <!-- Resume View -->
         <div id="resume-view">
             <section class="resume-container">
@@ -462,7 +614,7 @@
                             <div class="skill-list">
                                 <span class="skill-tag">Rhino 3D</span>
                                 <span class="skill-tag">Grasshopper</span>
-                                <span class="skill-tag">Revit</span>
+                                <span class="skill-tag">Revit(BIM)</span>
                                 <span class="skill-tag">AutoDesk Auto CAD</span>
                                 <span class="skill-tag">Sketch Up</span>
                                 <span class="skill-tag">Envrionmental Analysis(Ladybut, Honeybee, Ecotect)</span>

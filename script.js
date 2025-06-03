@@ -2,11 +2,15 @@
 const homeTab = document.getElementById('home-tab');
 const projectTab = document.getElementById('project-tab');
 const resumeTab = document.getElementById('resume-tab');
+const techStudiesTab = document.getElementById('tech-studies-tab');
 const homeView = document.getElementById('home-view');
 const artworkView = document.getElementById('artwork-view');
 const resumeView = document.getElementById('resume-view');
+const techStudiesView = document.getElementById('tech-studies-view');
 const projectDetailView = document.getElementById('project-detail-view');
 const backToProjectsBtn = document.getElementById('back-to-projects');
+const techDetailView = document.getElementById('tech-detail-view');
+const backToTechStudiesBtn = document.getElementById('back-to-tech-studies');
 
 // 프로젝트 데이터 - 실제 프로젝트 정보로 채워넣으세요
 const projectsData = {
@@ -567,17 +571,342 @@ const projectsData = {
     
 };
 
+// Tech Studies 데이터
+const techStudiesData = {
+    tech1: {
+        category: "Building Information Modeling",
+        tools: "Revit, BIM, Dynamo",
+        title: "Revit BIM Implementation",
+        description: `
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/main.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/1.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/2.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/3.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/4.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/5.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/6.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/7.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/8.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/9.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/10.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech1/11.jpg" alt="Arduino System">
+                    </figure>
+            </div>           
+        `
+    },
+    tech4: {
+        category: "Geographic Information Systems",
+        tools: "ArcGIS Pro, QGIS Python",
+        title: "ArcGIS Spatial Analysis",
+        description: `
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech4/main.png" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech4/pic2.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech4/pic3.png" alt="Arduino System">
+                    </figure>
+            </div>
+        `
+    },
+    tech3: {
+        category: "Robotic Fabrication",
+        tools: "Grasshopper, Robotic Arm, Arduino, Rhino 3D",
+        title: "Grasshopper_Robotic Control",
+        description: `
+         <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/main.png" alt="Arduino System">
+                    </figure>
+        </div>
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/Robotic_connection_Diagram.png" alt="Arduino System">
+                    <figcaption>Robotic_connection_Diagram</figcaption>
+                    </figure>
+        </div>   
+        
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/gh1.jpg" alt="Arduino System">
+                    </figure>
+        </div>   
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/gh2.jpg" alt="Arduino System">
+                    </figure>
+        </div>
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/gh3.jpg" alt="Arduino System">
+                    </figure>
+        </div>
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/gh4.jpg" alt="Arduino System">
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/gh4.jpg" alt="Arduino System">
+                    </figure>
+        </div>
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/Solenoid.png" alt="Arduino System">
+                    <figcaption>Solenoid_Aduino Code</figcaption>
+                    </figure>
+        </div>
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech3/Motor.png" alt="Arduino System">
+                    <figcaption>Motor_Aduino Code</figcaption>
+                    </figure>
+        </div>
+        `
+    },
+    tech6: {
+        category: "Environmental Analysis",
+        tools: "Ladybug, Honeybee, Butterfly, Galapagos",
+        title: "Grasshopper_Environmental Simulation",
+        description: `
+           <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/main.png" alt="Arduino System">
+                    <figcaption>Grasshopper_Solar Analysis</figcaption>
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/model.gif" alt="Arduino System">
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic1.jpg" alt="Arduino System">
+                    <figcaption>Grasshopper_Solar Analysis_Street</figcaption>
+                    </figure>
+        </div>  
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic3.jpg" alt="Arduino System">
+                    <figcaption>Grasshopper_Solar Analysis_Street</figcaption>
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic2.jpg" alt="Arduino System">
+                    <figcaption>Grasshopper_Solar Analysis_Building</figcaption>
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic4.jpg" alt="Arduino System">
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic5.jpg" alt="Arduino System">
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic6.jpg" alt="Arduino System">
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic7.jpg" alt="Arduino System">
+                        <figcaption>Grasshopper_Wind Analysis</figcaption>
+                    </figure>
+        </div> 
+        <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech6/pic8.jpg" alt="Arduino System">
+                        <figcaption>Grasshopper_UTCI Analysis</figcaption>
+                    </figure>
+        </div> 
+        `
+    },
+    tech2: {
+        category: "Physical Computing",
+        tools: "Arduino, Raspberry Pi, Sensors, Python, Grasshopper",
+        title: "Arduino Interactive Systems",
+        description: `
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech2/main.jpg" alt="Arduino System">
+                        <figcaption>LumenBeat</figcaption>
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech2/Diagram.png" alt="Arduino System">
+                        <figcaption>Component Diagram</figcaption>
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech2/Code1.png" alt="Arduino System">
+                        <figcaption>Arduino Code_Proccess & Output</figcaption>
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech2/Code2.png" alt="Arduino System">
+                        <figcaption>Arduino Code_Proccess & Output</figcaption>
+                    </figure>
+            </div>
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech2/iteration.jpg" alt="Arduino System">
+                        <figcaption>Grasshopper, Form Finding</figcaption>
+                    </figure>
+            </div>
+            <div class="project-image-grid">
+                <figure>
+                    <img src="Tech_img/tech2/pic3.png" alt="Food Desert Map">
+                </figure>
+                <figure>
+                    <img src="Tech_img/tech2/pic4.png" alt="Food Desert Map">
+                </figure>
+            </div>
+            <div class="project-image-full">
+                <figure>
+                    <img src="Tech_img/tech2/vid.gif" alt="Food Desert Map">
+                </figure>
+            </div>
+        `
+    },
+    tech5: {
+        category: "Computational Design",
+        tools: "Grasshopper, Python, C#",
+        title: "Grasshopper_location & route",
+        description: `
+           <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/main.jpg" alt="Arduino System">
+                        <figcaption>Grasshopper, Route Finding</figcaption>
+                    </figure>
+            </div>  
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic1.jpg" alt="Arduino System">
+                        <figcaption>Grasshopper Code</figcaption>
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic2.jpg" alt="Arduino System">
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic2-1.gif" alt="Arduino System">
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic3.jpg" alt="Arduino System">
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic4.jpg" alt="Arduino System">
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic5.jpg" alt="Arduino System">
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic6.jpg" alt="Arduino System">
+                        <figcaption>Export Geojson for Mapping</figcaption>
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic7.gif" alt="Arduino System">
+                    </figure>
+            </div> 
+            <div class="project-image-full">
+                    <figure>
+                        <img src="Tech_img/tech5/pic8.jpg" alt="Arduino System">
+                    </figure>
+            </div>
+        `
+    }
+};
+
 // Function to reset all tabs and views
 function resetAll() {
     // Remove active class from all tabs
     projectTab.classList.remove('active');
     resumeTab.classList.remove('active');
+    techStudiesTab.classList.remove('active');
     
     // Hide all views
     homeView.classList.remove('active-view');
     artworkView.classList.remove('active-view');
     resumeView.classList.remove('active-view');
+    techStudiesView.classList.remove('active-view');
     projectDetailView.classList.add('hidden');
+    techDetailView.classList.add('hidden');
 }
 
 // 프로젝트 상세 페이지 표시 함수
@@ -614,6 +943,39 @@ function showProjectDetail(projectId) {
     window.history.pushState({view: 'project', projectId: projectId}, '', '#project/' + projectId);
 }
 
+// Tech Study 상세 페이지 표시 함수
+function showTechDetail(techId) {
+    const techStudy = techStudiesData[techId];
+    
+    if (!techStudy) {
+        console.error('Tech study not found:', techId);
+        return;
+    }
+    
+    const detailCategory = techDetailView.querySelector('.tech-detail-category');
+    const detailTools = techDetailView.querySelector('.tech-detail-tools');
+    const detailTitle = techDetailView.querySelector('.tech-detail-title');
+    const detailContent = techDetailView.querySelector('.tech-detail-content');
+    
+    detailCategory.textContent = techStudy.category;
+    detailTools.textContent = techStudy.tools;
+    detailTitle.textContent = techStudy.title;
+    detailContent.innerHTML = techStudy.description;
+    
+    // 모든 뷰 숨기기
+    homeView.classList.remove('active-view');
+    artworkView.classList.remove('active-view');
+    techStudiesView.classList.remove('active-view');
+    resumeView.classList.remove('active-view');
+    projectDetailView.classList.add('hidden');
+    
+    // Tech Study 상세 페이지 표시
+    techDetailView.classList.remove('hidden');
+    
+    // 브라우저 히스토리에 상태 추가
+    window.history.pushState({view: 'tech-detail', techId: techId}, '', '#tech/' + techId);
+}
+
 // Home tab (logo) click event
 homeTab.addEventListener('click', function() {
     resetAll();
@@ -631,6 +993,16 @@ projectTab.addEventListener('click', function() {
     
     // 브라우저 히스토리 상태 업데이트
     window.history.pushState({view: 'projects'}, '', '#projects');
+});
+
+// Tech Studies tab click event
+techStudiesTab.addEventListener('click', function() {
+    resetAll();
+    techStudiesTab.classList.add('active');
+    techStudiesView.classList.add('active-view');
+    
+    // 브라우저 히스토리 상태 업데이트
+    window.history.pushState({view: 'tech-studies'}, '', '#tech-studies');
 });
 
 // Resume tab click event
@@ -758,6 +1130,21 @@ document.querySelectorAll('.read-more').forEach(link => {
     });
 });
 
+// Tech Study 카드 클릭 이벤트
+document.querySelectorAll('.tech-study-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const techId = this.dataset.techId;
+        if (techId) {
+            showTechDetail(techId);
+        }
+    });
+});
+
+// Tech Studies 뒤로 가기 버튼 클릭 이벤트
+backToTechStudiesBtn.addEventListener('click', function() {
+    window.history.back();
+});
+
 // 뒤로 가기 버튼 클릭 이벤트
 backToProjectsBtn.addEventListener('click', function() {
     // 브라우저 히스토리에서 뒤로가기 실행
@@ -806,7 +1193,31 @@ window.addEventListener('popstate', function(event) {
     } else if (event.state.view === 'home') {
         // 홈 페이지로 이동
         homeView.classList.add('active-view');
+
+    } else if (event.state.view === 'tech-studies') {
+        // Tech Studies 페이지로 이동
+        techStudiesTab.classList.add('active');
+        techStudiesView.classList.add('active-view');
         
+    } else if (event.state.view === 'tech-detail') {
+        // Tech Study 상세 페이지로 이동
+        techDetailView.classList.remove('hidden');
+        
+        const techId = event.state.techId;
+        const techStudy = techStudiesData[techId];
+        
+        if (techStudy) {
+            const detailCategory = techDetailView.querySelector('.tech-detail-category');
+            const detailTools = techDetailView.querySelector('.tech-detail-tools');
+            const detailTitle = techDetailView.querySelector('.tech-detail-title');
+            const detailContent = techDetailView.querySelector('.tech-detail-content');
+            
+            detailCategory.textContent = techStudy.category || '';
+            detailTools.textContent = techStudy.tools || '';
+            detailTitle.textContent = techStudy.title || '';
+            detailContent.innerHTML = techStudy.description || '';
+        }
+
     } else if (event.state.view === 'resume') {
         // 이력서 페이지로 이동
         resumeTab.classList.add('active');
@@ -854,7 +1265,18 @@ document.addEventListener('DOMContentLoaded', function() {
         resetAll();
         projectTab.classList.add('active');
         artworkView.classList.add('active-view');
-        
+    
+    } else if (hash === '#tech-studies') {
+        resetAll();
+        techStudiesTab.classList.add('active');
+        techStudiesView.classList.add('active-view');
+
+    } else if (hash.startsWith('#tech/')) {
+        const techId = hash.replace('#tech/', '');
+        resetAll();
+        techStudiesTab.classList.add('active');
+        showTechDetail(techId);
+
     } else if (hash === '#resume') {
         resetAll();
         resumeTab.classList.add('active');
